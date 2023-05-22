@@ -5,56 +5,46 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Knightly - Game'),
+        title: Text(
+          'Knightly - Game',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Column(
         children: [
-          // Chessboard widget
-          Container(
-            // Placeholder for the chessboard widget
-            height: 400,
-            color: Colors.grey,
-          ),
-          // Move log widget
           Expanded(
             child: Container(
-              // Placeholder for the move log widget
-              color: Colors.white,
-              child: ListView(
-                children: [
-                  ListTile(
-                    title: Text('Move 1'),
-                  ),
-                  ListTile(
-                    title: Text('Move 2'),
-                  ),
-                  // Add more move history list tiles here
-                ],
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/chessboard_background.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
+              padding: EdgeInsets.all(16),
+              child: Placeholder(), // Placeholder for the chessboard widget
             ),
           ),
-          // Timer widget
           Container(
-            padding: EdgeInsets.all(10),
-            color: Colors.blueGrey,
+            padding: EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Player 1: 00:30',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: Colors.grey, fontSize: 18),
                 ),
                 Text(
                   'Player 2: 01:15',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: Colors.grey, fontSize: 18),
                 ),
               ],
             ),
           ),
-          // Chat box widget
           Container(
-            padding: EdgeInsets.all(10),
-            color: Colors.blueGrey,
+            padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 Expanded(
@@ -63,6 +53,9 @@ class GameScreen extends StatelessWidget {
                       hintText: 'Type your message',
                       fillColor: Colors.white,
                       filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                 ),
@@ -72,6 +65,12 @@ class GameScreen extends StatelessWidget {
                     // Handle send message button press
                   },
                   child: Text('Send'),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                 ),
               ],
             ),
