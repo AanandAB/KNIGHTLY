@@ -1,64 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:knightly/game_archive_screen.dart';
-import 'package:knightly/leaderboard_screen.dart';
-import 'package:knightly/profile_screen.dart';
-import 'package:knightly/wallet_screen.dart';
-import 'package:knightly/game_screen.dart';
-import 'package:knightly/screens/home_screen.dart';
-import 'package:knightly/screens/game_screen.dart';
-import 'package:knightly/screens/profile_screen.dart';
-import 'package:knightly/screens/game_archive_screen.dart';
-import 'package:knightly/screens/leaderboard_screen.dart';
-import 'package:knightly/screens/wallet_screen.dart';
+import 'welcome_page.dart';
+import 'home_page.dart';
+import 'login_page.dart';
+import 'game_page.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  Moralis.start("YOUR_API_KEY");
-  runApp(MyApp());
+  runApp(ChessApp());
 }
 
-class MyApp extends StatelessWidget {
+class ChessApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Knightly',
+      title: 'Chess App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/welcome',
       routes: {
-        '/': (context) => HomeScreen(),
-        '/game': (context) => GameScreen(),
-        '/profile': (context) => ProfileScreen(),
-        '/game_archive': (context) => GameArchiveScreen(),
-        '/leaderboard': (context) => LeaderboardScreen(),
-        '/wallet': (context) => WalletScreen(),
+        '/welcome': (context) => WelcomePage(),
+        '/home': (context) => HomePage(),
+        '/login': (context) => LoginPage(),
+        '/game': (context) => GamePage(),
       },
     );
   }
 }
 
-class AuthService {
-  static Future<MoralisUser> signUp(String username, String password) async {
-    final user =
-        await MoralisUser.signUp(username, password, username: username);
-    return user;
-  }
-
-  static Future<MoralisUser> login(String username, String password) async {
-    final user = await MoralisUser.login(username, password);
-    return user;
-  }
-
-  static Future<void> logout() async {
-    await MoralisUser.logout();
-  }
-
-  static Future<bool> isUserLoggedIn() async {
-    return await MoralisUser.currentUser() != null;
-  }
-
-  static Future<MoralisUser> getCurrentUser() async {
-    return await MoralisUser.currentUser();
-  }
-}
